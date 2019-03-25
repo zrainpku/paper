@@ -45,10 +45,11 @@ cv::Mat WebSegment::imgToRidge(cv::Mat img){
     
     cv::Mat matSrc1=img.clone();
     //    cv::cvtColor(matSrc, matSrc, CV_BGR2GRAY);
-    cv::Mat matDst(matSrc1.size(),CV_8U);
+    cv::Mat matDst;
 //    std::vector<cv::Mat> labimg;
 //    cv::split(matSrc1, labimg);
 //    matSrc1=labimg[0];
+    cv::imwrite(imgout+"gray0.png", matSrc1);
     cv::cvtColor(matSrc1, matDst, CV_BGR2GRAY);
     matSrc1=matDst;
     cv::imwrite(imgout+"gray1.png", matSrc1);
@@ -191,7 +192,7 @@ cv::Mat showWrinkleCommonLine(cv::Mat mat){
 //        float cirArea=3.1415926*radius*radius;
 //        float div=contourArea(contours[i])/cirArea;
         
-        if(cv::contourArea(contours[i])<200 )
+        if(cv::contourArea(contours[i])<300 )
         {
             contours.erase(it);
             i--;
@@ -218,7 +219,7 @@ cv::Mat showWrinkleCommonLine(cv::Mat mat){
     mark.copyTo(resultImage, resultMask);
     
     //    cv::morphologyEx(resultImage,resultImage,cv::MORPH_OPEN,getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3)));
-    cv::imwrite(imgout+"resultImage.png", resultImage);
+    cv::imwrite(imgout+"resultImageD.png", resultImage);
     
     //    mark2=resultImage.clone();
     //    contours.clear();

@@ -137,6 +137,7 @@
 		EF3E01B7221FDFD900532482 /* frangi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF3E01B5221FDFD900532482 /* frangi.cpp */; };
 		EF3E01BA2228EEEC00532482 /* rgb2rbx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF3E01B82228EEEC00532482 /* rgb2rbx.cpp */; };
 		EF3EFFC3221F93E700532482 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF3EFFC2221F93E700532482 /* main.cpp */; };
+		EFF7AFFD2245E29400B735D5 /* hash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFF7AFFB2245E29400B735D5 /* hash.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -341,6 +342,8 @@
 		EF3EFFFD221F95AC00532482 /* libopencv_video.2.4.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_video.2.4.13.dylib; path = ../../../../../usr/local/Cellar/opencv/2.4.13.2/lib/libopencv_video.2.4.13.dylib; sourceTree = "<group>"; };
 		EF3EFFFE221F95AC00532482 /* libopencv_videostab.2.4.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videostab.2.4.13.dylib; path = ../../../../../usr/local/Cellar/opencv/2.4.13.2/lib/libopencv_videostab.2.4.13.dylib; sourceTree = "<group>"; };
 		EF3EFFFF221F95AC00532482 /* libopencv_videostab.2.4.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videostab.2.4.13.dylib; path = ../../../../../usr/local/Cellar/opencv/2.4.13.2/lib/libopencv_videostab.2.4.13.dylib; sourceTree = "<group>"; };
+		EFF7AFFB2245E29400B735D5 /* hash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hash.cpp; sourceTree = "<group>"; };
+		EFF7AFFC2245E29400B735D5 /* hash.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = hash.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -483,6 +486,8 @@
 		EF3EFFB6221F93E700532482 = {
 			isa = PBXGroup;
 			children = (
+				EFF7AFFB2245E29400B735D5 /* hash.cpp */,
+				EFF7AFFC2245E29400B735D5 /* hash.hpp */,
 				EF3E01B82228EEEC00532482 /* rgb2rbx.cpp */,
 				EF3E01B92228EEEC00532482 /* rgb2rbx.hpp */,
 				EF3E01B5221FDFD900532482 /* frangi.cpp */,
@@ -759,6 +764,7 @@
 				EF3E01B7221FDFD900532482 /* frangi.cpp in Sources */,
 				EF3E01BA2228EEEC00532482 /* rgb2rbx.cpp in Sources */,
 				EF3EFFC3221F93E700532482 /* main.cpp in Sources */,
+				EFF7AFFD2245E29400B735D5 /* hash.cpp in Sources */,
 				EF3E01B4221FA7B400532482 /* mytools.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -890,6 +896,7 @@
 				EF3EFFC8221F93E700532482 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

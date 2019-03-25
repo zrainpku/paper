@@ -138,12 +138,99 @@ void findbigrect(cv::Mat &img,int angle,int gap){
     cv::Mat dest(img.size(),CV_8UC1);
     int nr= img.rows;
     int nc= img.cols ;
-    for (int j=0; j<nr;j++)
-        for (int i=0; i<nc; i++){
+    for (int j=0; j<nr-angle;j++)
+        for (int i=0; i<nc-angle; i++){
             findrect(img, dest, j, i,angle,gap);
         }
     cv::imwrite(imgout11+"imgling3.png", dest);
 }
+
+bool findangle(cv::Mat &img,bool lefttop,int long_edge,int short_edge,int r,int c){
+    if(lefttop){
+        int gap=0;
+        for(int i=0;i<long_edge;i++){
+            if(img.at<uchar>(r,c+i)<200)
+                gap++;
+        }
+        for(int i=0;i<short_edge;i++){
+            if(img.at<uchar>(r+i,c)<200)
+                gap++;
+        }
+        if(gap>5)return false;
+        else return true;
+        
+    }else{
+        int gap=0;
+        for(int i=0;i<long_edge;i++){
+            if(img.at<uchar>(r,c-i)<200)
+                gap++;
+        }
+        for(int i=0;i<short_edge;i++){
+            if(img.at<uchar>(r-i,c)<200)
+                gap++;
+        }
+        if(gap>5)return false;
+        else return true;
+    
+    }
+}
+
+
+void findAllrect(cv::Mat &img,int long_angel,int short_angel){
+    cv::Mat dest(img.size(),CV_8UC1);
+//    cv::dilate(img, img, getStructuringElement(cv::MORPH_RECT, cv::Size(5, 5)));
+//    cv::imwrite(imgout11+"beforeRect.png", img);
+    int nr= img.rows;
+    int nc= img.cols ;
+    std::vector<cv::Point2i> pleft,pright;
+    cv::Point2i ptemp;
+    for (int j=0; j<nr-short_angel;j++)
+        for (int i=0; i<nc-long_angel; i++){
+            if(findangle(img, true, long_angel, short_angel, j, i)){
+                ptemp.x=j;
+                ptemp.y=i;
+                pleft.push_back(ptemp);
+            }
+        }
+    for (int j=short_angel; j<nr;j++)
+        for (int i=long_angel; i<nc; i++){
+            if(findangle(img, false, long_angel, short_angel, j, i)){
+                ptemp.x=j;
+                ptemp.y=i;
+                pright.push_back(ptemp);
+            }
+        }
+    for(int i=0;i<pleft.size();i++){
+        for(int j=0;j<pright.size();j++){
+            int lr=pleft[i].x,lc=pleft[i].y,rr=pright[j].x,rc=pright[j].y;
+            int total=2*(rr-lr+rc-lc),sumrect=0;
+            for(int k=lr;k<=rr;k++){
+                if(img.at<uchar>(k,lc)>200)sumrect++;
+                if(img.at<uchar>(k,rc)>200)sumrect++;
+            }
+            for(int k=lc;k<=rc;k++){
+                if(img.at<uchar>(lr,k)>200)sumrect++;
+                if(img.at<uchar>(rr,k)>200)sumrect++;
+            }
+            float ans=(float)sumrect/(float)total;
+            if(ans>0.93){
+                //find rect
+                for(int m=lr;m<=rr;m++){
+                    dest.at<uchar>(m,lc)=255;
+                    dest.at<uchar>(m,rc)=255;
+                }
+                for(int m=lc;m<=rc;m++){
+                    dest.at<uchar>(lr,m)=255;
+                    dest.at<uchar>(rr,m)=255;
+                }
+            }
+        }
+    }
+    
+    cv::imwrite(imgout11+"imgling44D.png", dest);
+}
+
+
 
 
 void findline(cv::Mat &img,int lenHigh,int lenWidth,int miss){
@@ -268,7 +355,8 @@ std::string hash_col(cv::Mat src,int num){
     return res;
 }
 
-void hash_img(){
+std::string hash_img(){
+    std::string res;
     cv::Mat src=cv::imread(img_pathhash+"src.png",CV_LOAD_IMAGE_GRAYSCALE);
     std::string Ar,Ac,B1r,B1c,B2r,B2c,B3r,B3c,B4r,B4c,C1r,C1c,C2r,C2c,C3r,C3c,C4r,C4c;
     std::ofstream outfile(img_pathhash+"hash.txt");
@@ -325,5 +413,7 @@ void hash_img(){
     outfile<<"C4r: "<<C4r<<std::endl;
     outfile<<"C4c: "<<C4c<<std::endl;
     outfile.close();
+    res=Ar+Ac+B1r+B1c+B2r+B2c+B3r+B3c+B4r+B4c+C1r+C1c+C2r+C2c+C3r+C3c+C4r+C4c;
+    return res;
     
 }

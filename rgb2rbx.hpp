@@ -15,6 +15,8 @@ void rgb2RedRbx(cv::Mat &image,std::string outpath);
 void huffindline(cv::Mat &src);
 void findline(cv::Mat &img,int lenhigh,int minlengthwidth,int misspot);
 void findbigrect(cv::Mat &img,int angle,int gap);
-void hash_img();
+std::string hash_img();
+
+void findAllrect(cv::Mat &img,int long_angel,int short_angel);
 
 #endif /* rgb2rbx_hpp */
