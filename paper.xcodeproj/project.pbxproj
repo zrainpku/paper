@@ -138,6 +138,7 @@
 		EF3E01BA2228EEEC00532482 /* rgb2rbx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF3E01B82228EEEC00532482 /* rgb2rbx.cpp */; };
 		EF3EFFC3221F93E700532482 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF3EFFC2221F93E700532482 /* main.cpp */; };
 		EFF7AFFD2245E29400B735D5 /* hash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFF7AFFB2245E29400B735D5 /* hash.cpp */; };
+		EFF7B000224D029200B735D5 /* wavelet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFF7AFFE224D029200B735D5 /* wavelet.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -344,6 +345,8 @@
 		EF3EFFFF221F95AC00532482 /* libopencv_videostab.2.4.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videostab.2.4.13.dylib; path = ../../../../../usr/local/Cellar/opencv/2.4.13.2/lib/libopencv_videostab.2.4.13.dylib; sourceTree = "<group>"; };
 		EFF7AFFB2245E29400B735D5 /* hash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hash.cpp; sourceTree = "<group>"; };
 		EFF7AFFC2245E29400B735D5 /* hash.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = hash.hpp; sourceTree = "<group>"; };
+		EFF7AFFE224D029200B735D5 /* wavelet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wavelet.cpp; sourceTree = "<group>"; };
+		EFF7AFFF224D029200B735D5 /* wavelet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = wavelet.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -486,6 +489,8 @@
 		EF3EFFB6221F93E700532482 = {
 			isa = PBXGroup;
 			children = (
+				EFF7AFFE224D029200B735D5 /* wavelet.cpp */,
+				EFF7AFFF224D029200B735D5 /* wavelet.hpp */,
 				EFF7AFFB2245E29400B735D5 /* hash.cpp */,
 				EFF7AFFC2245E29400B735D5 /* hash.hpp */,
 				EF3E01B82228EEEC00532482 /* rgb2rbx.cpp */,
@@ -763,6 +768,7 @@
 			files = (
 				EF3E01B7221FDFD900532482 /* frangi.cpp in Sources */,
 				EF3E01BA2228EEEC00532482 /* rgb2rbx.cpp in Sources */,
+				EFF7B000224D029200B735D5 /* wavelet.cpp in Sources */,
 				EF3EFFC3221F93E700532482 /* main.cpp in Sources */,
 				EFF7AFFD2245E29400B735D5 /* hash.cpp in Sources */,
 				EF3E01B4221FA7B400532482 /* mytools.cpp in Sources */,
