@@ -7,7 +7,9 @@
 //
 
 #include "hash.hpp"
-
+#include "mytools.hpp"
+#include "rgb2rbx.hpp"
+//  3yue 30 hao wrute include rgb2xrbx
 float Hash::HanmingDistance(std::string &str1,std::string &str2,int len)
 {
     if((str1.size()!=len)||(str2.size()!=len))
@@ -39,7 +41,7 @@ std::string Hash::average_hash(cv::Mat &img,int r,int c){
         }
     }
     mean/=r*c;
-    std::cout<<"mean: "<<mean<<std::endl;
+//    std::cout<<"mean: "<<mean<<std::endl;
     for(int i=0;i<r;i++ ){
         for(int j=0;j<c;j++){
 //            std::cout<<"i: "<<i<<"j: "<<j<<(int)src.at<uchar>(i,j)<<std::endl;
@@ -135,7 +137,8 @@ std::string Hash::median_hash(cv::Mat &img,int r,int c){
     std::string res;
     cv::Mat src=img.clone(),dest=img.clone();
     //    cv::cvtColor(src, src, CV_BGR2GRAY);
-        cv::sortIdx(src, dest, CV_SORT_ASCENDING);
+//    cv::sortIdx(src, dest, CV_SORT_ASCENDING);
+    cv::sort(src, dest, CV_SORT_ASCENDING);
     uint median=dest.at<uchar>(r/2,c-1);
     cv::resize(src, src, cv::Size(c, r), (0, 0), (0, 0), cv::INTER_CUBIC);
     for(int i=0;i<r;i++){
@@ -173,7 +176,7 @@ std::string Hash::perceptual_hash(cv::Mat &img,int r,int c){
 //    mean/=r*c;
     dest=dest(cv::Rect(0,0,c,r));
     
-    cv::sortIdx(dest, dest, CV_SORT_ASCENDING);
+    cv::sort(dest, dest, CV_SORT_ASCENDING);
     double median=dest.at<double>(r/2,c-1);
     for(int i=0;i<r;i++){
         for(int j=0;j<c;j++){
@@ -199,17 +202,47 @@ float Hash::Ans_perceptual_hash(cv::Mat &img1,cv::Mat &img2,int r,int c){
 std::string Hash::wavelet_hash(cv::Mat &img,int r,int c){
     std::string res;
     WaveTransform  wmt;
-    cv::Mat dest=wmt.WDT(img, "haar", 2);
+    cv::Mat src=img.clone();
+    cv::resize(src, src, cv::Size(c*8, r*8), (0, 0), (0, 0), cv::INTER_CUBIC);
+    cv::Mat dest=wmt.WDT(src, "haar", 3);
+    dest=dest(cv::Rect(0,0,c,r));
+    cv::imwrite("/Users/zrain/Desktop/scshot/hash/wavelet1_hash.png", dest);
+    cv::sort(dest, dest, CV_SORT_ASCENDING);
+    cv::imwrite("/Users/zrain/Desktop/scshot/hash/wavelet2_hash.png", dest);
+    double median=dest.at<double>(r/2,c-1);
+    for(int i=0;i<r;i++){
+        for(int j=0;j<c;j++){
+            if(median<dest.at<double>(i,j))res+="1";
+            else res+="0";
+        }
+    }
+//    cv::imwrite("/Users/zrain/Desktop/scshot/hash/wavelet_hash.png", dest);
     return res;
 }
 
 float Hash::Ans_wavelet_hash(cv::Mat &img1,cv::Mat &img2,int r,int c){
     float res=0;
     std::string str1,str2;
-    str1=wavelet_hash(img1,r,c);
-    return 0;
+    str1=wavelet_hash(img1, r, c);
+    str2=wavelet_hash(img2, r, c);
+//    std::cout<<str1<<std::endl<<str2<<std::endl;
+    res=HanmingDistance(str1,str2,r*c);
+    return res;
 }
 //#############outline_hash########
+float Hash::Ans_outline_hash(cv::Mat &img1,cv::Mat &img2,int r,int c){
+    float res=0;
+    std::string str1,str2;
+    str1=outline_hash(img1, r, c);
+    str2=outline_hash(img2, r, c);
+    //    std::cout<<str1<<std::endl<<str2<<std::endl;
+    res=HanmingDistance(str1,str2,r*c);
+    return res;
+}
+
+
+
+
 
 std::string Hash::outline_hash(cv::Mat &img,int r,int c){
     std::string res;

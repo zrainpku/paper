@@ -53,7 +53,8 @@ cv::Mat WaveTransform::WDT(const cv::Mat &_src,const std::string _wname,const in
 //        cvSaveImage("dst1.jpg",&dstImg1);
 //#endif
 //        cv::normalize(dst,dst,0,255,cv::NORM_MINMAX);
-        cv::imwrite("/Users/zrain/Desktop/scshot/hash/wavelet_hang.png", dst);
+//        std::string path="/Users/zrain/Desktop/scshot/hash/wavelet_hang"+std::to_string(t)+".png";
+//        cv::imwrite(path, dst);
         //小波列变换
         for (int j=0;j<col;j++)
         {
@@ -74,7 +75,9 @@ cv::Mat WaveTransform::WDT(const cv::Mat &_src,const std::string _wname,const in
 //        cvSaveImage("dst2.jpg",&dstImg2);
 //#endif
 //        cv::normalize(dst,dst,0,255,cv::NORM_MINMAX);
-        cv::imwrite("/Users/zrain/Desktop/scshot/hash/wavelet_lie.png", dst);
+//        path="/Users/zrain/Desktop/scshot/hash/wavelet_line"+std::to_string(t)+".png";
+//
+//        cv::imwrite(path, dst);
         
         //更新
         row/=2;
@@ -149,8 +152,8 @@ cv::Mat WaveTransform::waveletDecompose( const cv::Mat &_src, const cv::Mat &_lo
     //数据拼接
     for (int i=0;i<D/2;i++)
     {
-        src.at<float>(0,i)=downDst1.at<float>(0,i);
-        src.at<float>(0,i+D/2)=downDst2.at<float>(0,i);
+        src.at<float>(0,i)=downDst1.at<float>(0,i)/1.5;
+        src.at<float>(0,i+D/2)=downDst2.at<float>(0,i)/1.5;
         
     }
     return src;

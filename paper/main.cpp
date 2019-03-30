@@ -39,19 +39,26 @@ int main(int argc, const char * argv[]) {
     // class hash;
     Hash hash;
     cv::Mat img=cv::imread(Websource+"same/ppp.png",CV_LOAD_IMAGE_GRAYSCALE);
-    cv::Mat img1=cv::imread(Websource+"same/picD.png",CV_LOAD_IMAGE_GRAYSCALE);
-    cv::Mat img2=cv::imread(Websource+"same/picC.png",CV_LOAD_IMAGE_GRAYSCALE);
+    cv::Mat imgA=cv::imread(Websource+"same/picA.png",CV_LOAD_IMAGE_GRAYSCALE);
+    cv::Mat imgB=cv::imread(Websource+"same/picB.png",CV_LOAD_IMAGE_GRAYSCALE);
     
-    cv::Mat img3=cv::imread(Websource+"temp/imgling44C.png",CV_LOAD_IMAGE_GRAYSCALE);
-    cv::Mat img4=cv::imread(Websource+"temp/imgling44D.png",CV_LOAD_IMAGE_GRAYSCALE);
-//    cv::Mat img4=cv::imread(Websource+"email.png",CV_LOAD_IMAGE_GRAYSCALE);
-//    cv::resize(img4, img4, cv::Size(320, 180), (0, 0), (0, 0), cv::INTER_CUBIC);
-//    cv::imwrite(Websource+"email1.png", img4);
-//    std::string ah1=hash.average_hash(img, 18, 32);
-//    std::string ah2=hash.average_hash(img1, 18, 32);
-//    std::cout<<"hash distance: "<<hash.HanmingDistance(ah1, ah2, 18*32)<<std::endl;
-//    std::cout<<hash.Ans_average_hash(img, img1, 18, 32)<<std::endl;
-    std::cout<<hash.Ans_wavelet_hash(img, img1, 18, 32)<<std::endl;
+    cv::Mat imgC=cv::imread(Websource+"same/picC.png",CV_LOAD_IMAGE_GRAYSCALE);
+    cv::Mat imgD=cv::imread(Websource+"same/picD.png",CV_LOAD_IMAGE_GRAYSCALE);
+    std::string index="ABCD";
+    for(int i=0;i<3;i++){
+        for(int j=i+1;j<4;j++){
+            cv::Mat img1=cv::imread(Websource+"unsame/pic3"+index[i]+".png",CV_LOAD_IMAGE_GRAYSCALE);
+            cv::Mat img2=cv::imread(Websource+"unsame/pic3"+index[j]+".png",CV_LOAD_IMAGE_GRAYSCALE);
+            std::cout<<index[i]<<index[j]<<std::endl;
+            std::cout<<hash.Ans_average_hash(img2, img1, 18, 32)<<std::endl;
+            std::cout<<hash.Ans_block_hash(img2, img1, 18, 32)<<std::endl;
+            std::cout<<hash.Ans_difference_hash(img2, img1, 18, 32)<<std::endl;
+            std::cout<<hash.Ans_median_hash(img2, img1, 18, 32)<<std::endl;
+            std::cout<<hash.Ans_perceptual_hash(img2, img1, 18, 32)<<std::endl;
+            std::cout<<hash.Ans_wavelet_hash(img2, img1, 18, 32)<<std::endl;
+        }
+    }
+//    std::cout<<hash.Ans_wavelet_hash(img2, img1, 18, 32)<<std::endl;
     
     
 //    std::string oh1=hash.outline_hash(img2, 180, 320);
