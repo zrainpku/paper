@@ -13,16 +13,19 @@
 #include<string>
 class WebSegment {
 private:
-    cv::Mat imgSrc;
-    cv::Mat imgDest;
-    cv::Mat imgDraw;
-    cv::Mat imgNoWords;
+//    cv::Mat imgSrc;
+//    cv::Mat imgDest;
+//    cv::Mat imgDraw;
+//    cv::Mat imgNoWords;
     cv::Mat imgToRidge(cv::Mat mat);
     cv::Mat imgDeleteWords(cv::Mat &mat);
+    cv::Mat showWrinkleCommonLine(cv::Mat mat);
 public:
-    WebSegment(std::string imgPath);
+    WebSegment();
     ~WebSegment();
     std::string getOutImg();
+    cv::Mat getAnsImg(cv::Mat &img);
+    
 
 
 };//class

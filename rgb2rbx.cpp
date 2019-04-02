@@ -176,8 +176,9 @@ bool findangle(cv::Mat &img,bool lefttop,int long_edge,int short_edge,int r,int 
 }
 
 
-void findAllrect(cv::Mat &img,int long_angel,int short_angel){
-    cv::Mat dest(img.size(),CV_8UC1);
+cv::Mat findAllrect(cv::Mat &img,int long_angel,int short_angel){
+    cv::Mat dest=cv::Mat::zeros(img.size(), CV_8UC1);
+//    cv::Mat dest(img.size(),CV_8UC1);
 //    cv::dilate(img, img, getStructuringElement(cv::MORPH_RECT, cv::Size(5, 5)));
 //    cv::imwrite(imgout11+"beforeRect.png", img);
     int nr= img.rows;
@@ -228,20 +229,24 @@ void findAllrect(cv::Mat &img,int long_angel,int short_angel){
     }
     
     cv::imwrite(imgout11+"imgling44D.png", dest);
+    return dest;
 }
 
 
+bool cmp1(std::vector<cv::Point> a,std::vector<cv::Point> b){
+    return (cv::contourArea(a)>cv::contourArea(b));
+}
 
-
-void findline(cv::Mat &img,int lenHigh,int lenWidth,int miss){
-    cv::Mat dest(img.size(),CV_8UC1);
+cv::Mat findline(cv::Mat &img,int lenHigh,int lenWidth,int miss){
+    cv::Mat dest=cv::Mat::zeros(img.size(), CV_8UC1);
+//    cv::Mat dest(img.size(),CV_8UC1);
     int nr= img.rows;
     int nc= img.cols ;
     for (int j=0; j<nr;j++) {
-        for (int i=0; i<nc; ) {
+        for (int i=0; i<nc; i+=2) {
             int leng=i+lenWidth;
             if (leng>=nc){
-                leng=nc;
+                break;
             }
             int sum=0;
             for(int k=i;k<leng;k++){
@@ -250,22 +255,21 @@ void findline(cv::Mat &img,int lenHigh,int lenWidth,int miss){
                 }
             }
             if(sum<miss){
-                for(int k=i;k<leng;k++){
+                for(int k=0;k<nc;k++){
                     dest.at<uchar>(j,k)=255;
                 }
+                break;
             }
-            i=leng;
-            
-            
+//            i=leng;
         }//for
     }//for
     //stright line
-    for (int j=0; j<nr;) {
-        int leng=j+lenHigh;
-        if (leng>=nr){
-            leng=nr;
-        }
-        for (int i=0; i<nc; i++) {
+    for (int i=0; i<nc;i++) {
+        for (int j=0; j<nr; j+=2) {
+            int leng=j+lenHigh;
+            if (leng>=nr){
+                break;
+            }
             int sum=0;
             for(int k=j;k<leng;k++){
                 if(img.at<uchar>(k,i)<200){
@@ -273,17 +277,52 @@ void findline(cv::Mat &img,int lenHigh,int lenWidth,int miss){
                 }
             }
             if(sum<miss){
-                for(int k=j;k<leng;k++){
+                for(int k=0;k<nr;k++){
                     dest.at<uchar>(k,i)=255;
                 }
+                break;
             }
-            
-            
+//            j=leng;
             
         }//for
-        j=leng;
     }//for
-    cv::imwrite(imgout11+"imgling2.png", dest);
+//    cv::imwrite(imgout11+"imgdest.png", dest);
+
+    cv::dilate(dest, dest, getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3)));
+    cv::Mat ans=cv::Mat::zeros(img.size(),img.type());
+    img.copyTo(ans, dest);
+//    cv::imwrite(imgout11+"imgans1.png", ans);
+
+    std::vector<std::vector<cv::Point>> contours_small;
+    std::vector<std::vector<cv::Point>> contours;
+    std::vector<cv::Vec4i> hierarchy;
+    cv::Mat mark=cv::Mat::zeros(img.size(),img.type());
+    ans.copyTo(mark);
+//    cv::imwrite(imgout11+"imgmark.png", mark);
+    cv::findContours(mark, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_NONE);
+    cv::Mat resultMask = cv::Mat ::zeros(img.size(),CV_8U);
+    resultMask.setTo(0);
+    cv::Mat resultImage = cv::Mat ::zeros(img.size(),CV_8U);
+    
+    std::sort(contours.begin(),contours.end(),cmp1);
+    
+    for(int i=0;i<contours.size();i++)
+    {
+        std::vector<std::vector<cv::Point>>::iterator it=contours.begin()+i;
+        if(cv::contourArea(contours[i])<200 )
+        {
+            contours.erase(it);
+            i--;
+        }
+    }
+//    cv::imwrite(imgout11+"imgmark2.png", mark);
+    drawContours(resultMask, contours, -1, cv::Scalar(255),CV_FILLED);
+//    cv::imwrite(imgout11+"imgresultMask.png", resultMask);
+    cv::Mat ans2=cv::Mat::zeros(img.size(),img.type());
+    ans.copyTo(ans2, resultMask);
+    
+    return ans2;
+//    cv::imwrite(imgout11+"imgling2.png", ans);
 }
 
 std::string hash_row(cv::Mat src,int num){

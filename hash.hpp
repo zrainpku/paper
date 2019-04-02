@@ -18,7 +18,6 @@ private:
     std::string outlinehash_row(cv::Mat src,int num);
     std::string outlinehash_col(cv::Mat src,int num);
     std::string average_hash(cv::Mat &img,int r,int c);
-    float HanmingDistance(std::string &str1,std::string &str2,int len);
      std::string block_hash(cv::Mat &img,int r,int c);
     std::string outline_hash(cv::Mat &img,int r,int c);
     std::string difference_hash(cv::Mat &img,int r,int c);
@@ -26,8 +25,14 @@ private:
     std::string perceptual_hash(cv::Mat &img,int r,int c);
     std::string wavelet_hash(cv::Mat &img,int r,int c);
     
+    float HanmingDistance(std::string &str1,std::string &str2,int len);
+    float OutlineDistance(std::string &str1,std::string &str2,int len);
+    
 public:
     std::string get_average_hash(cv::Mat &img,int r,int c);
+    std::string get_outline_hash(cv::Mat &img,int r,int c);
+    
+    
     float Ans_average_hash(cv::Mat &img1,cv::Mat &img2,int r,int c);
     float Ans_block_hash(cv::Mat &img1,cv::Mat &img2,int r,int c);
     float Ans_difference_hash(cv::Mat &img1,cv::Mat &img2,int r,int c);
