@@ -167,11 +167,11 @@ cv::Mat WebSegment::showWrinkleCommonLine(cv::Mat mat){
     
     //****************************
     
-    std::vector<std::vector<cv::Point>> contours_small;
+    std::vector<std::vector<cv::Point> > contours_small;
     cv::threshold(mark, mark, 100, 255,CV_THRESH_BINARY );
     
     //filter
-    std::vector<std::vector<cv::Point>> contours;
+    std::vector<std::vector<cv::Point> > contours;
     std::vector<cv::Vec4i> hierarchy;
     cv::Mat mark2=mark.clone();
         cv::morphologyEx(mark2,mark2,cv::MORPH_OPEN,getStructuringElement(cv::MORPH_RECT, cv::Size(3, 3)));
@@ -187,7 +187,7 @@ cv::Mat WebSegment::showWrinkleCommonLine(cv::Mat mat){
     
     for(int i=0;i<contours.size();i++)
     {
-        std::vector<std::vector<cv::Point>>::iterator it=contours.begin()+i;
+        std::vector<std::vector<cv::Point> >::iterator it=contours.begin()+i;
 //        cv::Point2f center;
 //        float radius;
 //        minEnclosingCircle(contours[i],center,radius);

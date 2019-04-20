@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "E0E68E92C59BEE2232EAE0631B99F730A8B965FC",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "E0E68E92C59BEE2232EAE0631B99F730A8B965FC" : 9223372036854775807,
+    "342F00ECD50B583628B17606BCF7F6CDD9BF614B" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "0590BF7C-3EAB-417A-8027-7EDFF716A249",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "E0E68E92C59BEE2232EAE0631B99F730A8B965FC" : "paper\/",
+    "342F00ECD50B583628B17606BCF7F6CDD9BF614B" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "paper",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "paper.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:zrainpku\/cppsource.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "342F00ECD50B583628B17606BCF7F6CDD9BF614B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:zrainpku\/paper.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E0E68E92C59BEE2232EAE0631B99F730A8B965FC"
+    }
+  ]
+}

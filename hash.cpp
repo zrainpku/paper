@@ -91,7 +91,23 @@ float Hash::OutlineDistance(std::string &str1,std::string &str2,int len){
     if((str1.size()!=len)||(str2.size()!=len))
         return -1;
     float difference = 0,res=0.0;
-    std::vector<int> ls={36,64,64,64,36,36,64,64,64,64,36,36,36,36};
+//    std::vector<int> ls={36,64,64,64,36,36,64,64,64,64,36,36,36,36};
+    std::vector<int> ls;
+    ls.push_back(36);
+    ls.push_back(64);
+    ls.push_back(64);
+    ls.push_back(64);
+    ls.push_back(36);
+    ls.push_back(36);
+    ls.push_back(64);
+    ls.push_back(64);
+    ls.push_back(64);
+    ls.push_back(64);
+    ls.push_back(36);
+    ls.push_back(36);
+    ls.push_back(36);
+    ls.push_back(36);
+    
     int id=0;
     for(int i=0;i<ls.size();i++)
     {

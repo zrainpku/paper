@@ -293,8 +293,8 @@ cv::Mat findline(cv::Mat &img,int lenHigh,int lenWidth,int miss){
     img.copyTo(ans, dest);
 //    cv::imwrite(imgout11+"imgans1.png", ans);
 
-    std::vector<std::vector<cv::Point>> contours_small;
-    std::vector<std::vector<cv::Point>> contours;
+    std::vector<std::vector<cv::Point> > contours_small;
+    std::vector<std::vector<cv::Point> > contours;
     std::vector<cv::Vec4i> hierarchy;
     cv::Mat mark=cv::Mat::zeros(img.size(),img.type());
     ans.copyTo(mark);
@@ -308,7 +308,7 @@ cv::Mat findline(cv::Mat &img,int lenHigh,int lenWidth,int miss){
     
     for(int i=0;i<contours.size();i++)
     {
-        std::vector<std::vector<cv::Point>>::iterator it=contours.begin()+i;
+        std::vector<std::vector<cv::Point> >::iterator it=contours.begin()+i;
         if(cv::contourArea(contours[i])<200 )
         {
             contours.erase(it);
